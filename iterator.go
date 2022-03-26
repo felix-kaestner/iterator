@@ -121,15 +121,16 @@ type indexedIterator[T any] struct {
 }
 
 func (it *indexedIterator[T]) Next() (*IndexedValue[T], error) {
-	item, err := it.iter.Next()
+	next, err := it.iter.Next()
 	if err != nil {
 		return nil, err
 	}
-	it.index++
-	return &IndexedValue[T]{
+	item := &IndexedValue[T]{
 		index: it.index,
-		value: item,
-	}, nil
+		value: next,
+	}
+	it.index++
+	return item, nil
 }
 
 func (it *indexedIterator[T]) HasNext() bool {
@@ -141,7 +142,7 @@ func (it *indexedIterator[T]) HasNext() bool {
 // containing the index of that element and the element itself.
 func WithIndex[T any](iter Iterator[T]) Iterator[IndexedValue[T]] {
 	return &indexedIterator[T]{
-		index: -1,
+		index: 0,
 		iter:  iter,
 	}
 }
