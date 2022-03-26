@@ -4,16 +4,16 @@
     <span>Go Iterator Implementation with support for Generics (requires Go v1.18+).</span>
     <br><br>
     <a href="https://github.com/felix-kaestner/iterator/issues">
-        <img alt="Issues" src="https://img.shields.io/github/issues/felix-kaestner/iterator?color=29b6f6&style=flat-square">
+        <img alt="Issues" src="https://img.shields.io/github/issues/felix-kaestner/iterator?color=%2329b6f6&style=flat-square">
     </a>
     <a href="https://github.com/felix-kaestner/iterator/stargazers">
-        <img alt="Stars" src="https://img.shields.io/github/stars/felix-kaestner/iterator?color=29b6f6&style=flat-square">
+        <img alt="Stars" src="https://img.shields.io/github/stars/felix-kaestner/iterator?color=%2329b6f6&style=flat-square">
     </a>
     <a href="https://github.com/felix-kaestner/iterator/blob/main/LICENSE">
-        <img alt="License" src="https://img.shields.io/github/license/felix-kaestner/iterator?color=29b6f6&style=flat-square">
+        <img alt="License" src="https://img.shields.io/github/license/felix-kaestner/iterator?color=%2329b6f6&style=flat-square"/>
     </a>
     <a href="https://pkg.go.dev/github.com/felix-kaestner/iterator">
-        <img alt="Stars" src="https://img.shields.io/badge/go-documentation-blue?color=29b6f6&style=flat-square">
+        <img alt="Stars" src="https://img.shields.io/badge/go-documentation-blue?color=%2329b6f6&style=flat-square">
     </a>
     <a href="https://goreportcard.com/report/github.com/felix-kaestner/iterator">
         <img alt="Issues" src="https://goreportcard.com/badge/github.com/felix-kaestner/iterator?style=flat-square">
