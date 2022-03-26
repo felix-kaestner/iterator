@@ -55,17 +55,17 @@ type sliceIterator[T any] struct {
 	slice []T
 }
 
-func (s *sliceIterator[T]) Next() (*T, error) {
-	if s.index >= len(s.slice) {
+func (it *sliceIterator[T]) Next() (*T, error) {
+	if it.index >= len(it.slice) {
 		return nil, Done
 	}
-	item := s.slice[s.index]
-	s.index++
+	item := it.slice[it.index]
+	it.index++
 	return &item, nil
 }
 
-func (s *sliceIterator[T]) HasNext() bool {
-	return s.index < len(s.slice)
+func (it *sliceIterator[T]) HasNext() bool {
+	return it.index < len(it.slice)
 }
 
 // FromSlice returns a new Iterator for the given slice.
@@ -86,20 +86,20 @@ type indexedIterator[T any] struct {
 	iter  Iterator[T]
 }
 
-func (i *indexedIterator[T]) Next() (*IndexedValue[T], error) {
-	item, err := i.iter.Next()
+func (it *indexedIterator[T]) Next() (*IndexedValue[T], error) {
+	item, err := it.iter.Next()
 	if err != nil {
 		return nil, err
 	}
-	i.index++
+	it.index++
 	return &IndexedValue[T]{
-		index: i.index,
+		index: it.index,
 		value: *item,
 	}, nil
 }
 
-func (i *indexedIterator[T]) HasNext() bool {
-	return i.iter.HasNext()
+func (it *indexedIterator[T]) HasNext() bool {
+	return it.iter.HasNext()
 }
 
 // WithIndex returns a new Iterator that wraps each element
