@@ -89,6 +89,31 @@ func TestSliceIterator(t *testing.T) {
 	}
 }
 
+func TestChannelIterator(t *testing.T) {
+	ch := make(chan int)
+
+	go func() {
+		ch <- 1
+		ch <- 2
+		ch <- 3
+		close(ch)
+	}()
+
+	i := FromChannel(ch)
+
+	c := 0
+	for i.HasNext() {
+		c++
+		item, _ := i.Next()
+		assertEqual(t, c, *item)
+	}
+
+	assertEqual(t, i.HasNext(), false)
+
+	_, err := i.Next()
+	assertEqual(t, Done, err)
+}
+
 func TestIndexedIterator(t *testing.T) {
 	{
 		s := []int{1, 2, 3}

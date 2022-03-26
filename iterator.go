@@ -76,6 +76,40 @@ func FromSlice[T any](slice []T) Iterator[T] {
 	}
 }
 
+// channelIterator implements the Iterator interface for channels.
+type channelIterator[T any] struct {
+	next *T
+	ch   <-chan T
+}
+
+func (it *channelIterator[T]) Next() (*T, error) {
+	if !it.HasNext() {
+		return nil, Done
+	}
+	item := it.next
+	it.next = nil
+	return item, nil
+}
+
+func (it *channelIterator[T]) HasNext() bool {
+	if it.next == nil {
+		if item, ok := <-it.ch; ok {
+			it.next = &item
+		} else {
+			return false
+		}
+	}
+	return true
+}
+
+// FromChannel returns a new Iterator for the given channel.
+func FromChannel[T any](ch <-chan T) Iterator[T] {
+	return &channelIterator[T]{
+		next: nil,
+		ch:   ch,
+	}
+}
+
 // indexedIterator implements the Iterator interface for
 // indexed collections.
 // It wraps an existing Iterator and each element produced
