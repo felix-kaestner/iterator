@@ -33,7 +33,22 @@ func assertEqual(t *testing.T, expected, actual interface{}) {
 	t.Errorf("Test %s: Expected `%v` (type %v), Received `%v` (type %v)", t.Name(), expected, reflect.TypeOf(expected), actual, reflect.TypeOf(actual))
 }
 
-// Test the slice iterator
+func TestForEach(t *testing.T) {
+	s := []int{1, 2, 3}
+	i := FromSlice(s)
+
+	c := 0
+	ForEach(i, func(item *int) {
+		c++
+		assertEqual(t, c, *item)
+	})
+
+	assertEqual(t, i.HasNext(), false)
+
+	_, err := i.Next()
+	assertEqual(t, Done, err)
+}
+
 func TestSliceIterator(t *testing.T) {
 	{
 		s := []int{1, 2, 3}

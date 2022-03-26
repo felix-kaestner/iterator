@@ -34,6 +34,21 @@ type (
 	}
 )
 
+// ForEach iterates over the elements of the iterator, calling the
+// provided function for each element.
+//
+// This is equivalent to calling Next() until HasNext() returns false.
+// 	var it Iterator[T]
+// 	for it.HasNext() {
+// 		v, _ := it.Next()
+// 	}
+func ForEach[T any](iterator Iterator[T], visitor func(item *T)) {
+	for iterator.HasNext() {
+		item, _ := iterator.Next()
+		visitor(item)
+	}
+}
+
 // sliceIterator implements the Iterator interface for slices.
 type sliceIterator[T any] struct {
 	index int
