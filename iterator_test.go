@@ -98,7 +98,7 @@ func TestIndexedIterator(t *testing.T) {
 		for i.HasNext() {
 			c++
 			item, _ := i.Next()
-			assertEqual(t, c, item.value)
+			assertEqual(t, c, *item.value)
 			assertEqual(t, c-1, item.index)
 		}
 
@@ -114,17 +114,17 @@ func TestIndexedIterator(t *testing.T) {
 
 		assertEqual(t, i.HasNext(), true)
 		item, _ := i.Next()
-		assertEqual(t, 1, item.value)
+		assertEqual(t, 1, *item.value)
 		assertEqual(t, 0, item.index)
 
 		assertEqual(t, i.HasNext(), true)
 		item, _ = i.Next()
-		assertEqual(t, 2, item.value)
+		assertEqual(t, 2, *item.value)
 		assertEqual(t, 1, item.index)
 
 		assertEqual(t, i.HasNext(), true)
 		item, _ = i.Next()
-		assertEqual(t, 3, item.value)
+		assertEqual(t, 3, *item.value)
 		assertEqual(t, 2, item.index)
 
 		assertEqual(t, i.HasNext(), false)

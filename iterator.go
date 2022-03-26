@@ -30,7 +30,7 @@ type (
 	// along with its associated index in that collection or sequence.
 	IndexedValue[T any] struct {
 		index int
-		value T
+		value *T
 	}
 )
 
@@ -94,7 +94,7 @@ func (it *indexedIterator[T]) Next() (*IndexedValue[T], error) {
 	it.index++
 	return &IndexedValue[T]{
 		index: it.index,
-		value: *item,
+		value: item,
 	}, nil
 }
 
