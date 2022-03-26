@@ -56,7 +56,7 @@ type sliceIterator[T any] struct {
 }
 
 func (it *sliceIterator[T]) Next() (*T, error) {
-	if it.index >= len(it.slice) {
+	if !it.HasNext() {
 		return nil, Done
 	}
 	item := it.slice[it.index]
