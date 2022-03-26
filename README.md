@@ -1,45 +1,59 @@
-# Go Library Template
+# Iterator
 
 <p align="center">
-    <span>A minimal repository template for Go libraries.</span>
+    <span>Go Iterator Implementation with support for Generics (requires Go v1.18+).</span>
     <br><br>
-    <a href="https://github.com/felix-kaestner/go-library-template/issues">
-        <img alt="Issues" src="https://img.shields.io/github/issues/felix-kaestner/go-library-template?color=29b6f6&style=flat-square">
+    <a href="https://github.com/felix-kaestner/iterator/issues">
+        <img alt="Issues" src="https://img.shields.io/github/issues/felix-kaestner/iterator?color=29b6f6&style=flat-square">
     </a>
-    <a href="https://github.com/felix-kaestner/go-library-template/stargazers">
-        <img alt="Stars" src="https://img.shields.io/github/stars/felix-kaestner/go-library-template?color=29b6f6&style=flat-square">
+    <a href="https://github.com/felix-kaestner/iterator/stargazers">
+        <img alt="Stars" src="https://img.shields.io/github/stars/felix-kaestner/iterator?color=29b6f6&style=flat-square">
     </a>
-    <a href="https://github.com/felix-kaestner/go-library-template/blob/main/LICENSE">
-        <img alt="License" src="https://img.shields.io/github/license/felix-kaestner/go-library-template?color=29b6f6&style=flat-square">
+    <a href="https://github.com/felix-kaestner/iterator/blob/main/LICENSE">
+        <img alt="License" src="https://img.shields.io/github/license/felix-kaestner/iterator?color=29b6f6&style=flat-square">
     </a>
-    <a href="https://pkg.go.dev/github.com/felix-kaestner/go-library-template">
+    <a href="https://pkg.go.dev/github.com/felix-kaestner/iterator">
         <img alt="Stars" src="https://img.shields.io/badge/go-documentation-blue?color=29b6f6&style=flat-square">
     </a>
-    <a href="https://goreportcard.com/report/github.com/felix-kaestner/go-library-template">
-        <img alt="Issues" src="https://goreportcard.com/badge/github.com/felix-kaestner/go-library-template?style=flat-square">
+    <a href="https://goreportcard.com/report/github.com/felix-kaestner/iterator">
+        <img alt="Issues" src="https://goreportcard.com/badge/github.com/felix-kaestner/iterator?style=flat-square">
     </a>
-    <!-- <a href="https://codecov.io/gh/felix-kaestner/go-library-template">
-        <img src="https://img.shields.io/codecov/c/github/felix-kaestner/go-library-template?style=flat-square&token=KK7ZG7A90X"/>
-    </a> -->
+    <a href="https://codecov.io/gh/felix-kaestner/iterator">
+        <img src="https://img.shields.io/codecov/c/github/felix-kaestner/iterator?style=flat-square&token=KK7ZG7A90X"/>
+    </a>
     <a href="https://twitter.com/kaestner_felix">
         <img alt="Twitter" src="https://img.shields.io/badge/twitter-@kaestner_felix-29b6f6?style=flat-square">
     </a>
 </p>
 
-## Usage 
-
-Simply scaffold a new project using the `Use this template`-Button on the [Repository GitHub Page](https://github.com/felix-kaestner/go-library-template).
-
-<!-- ## Quickstart
+## Quickstart
 
 ```go
 package main
 
-import "github.com/felix-kaestner/go-library-template"
+import (
+	"fmt"
+
+	"github.com/felix-kaestner/iterator"
+)
 
 func main() {
-    // TODO: Do some stuff with the library
+	s := []int{1, 2, 3}
+	i := iterator.FromSlice(s)
+
+	for i.HasNext() {
+		item, _ := i.Next()
+		fmt.Println(fmt.Sprintf("item: %d", *item))
+	}
 }
+```
+
+Output:
+
+```sh
+item: 1
+item: 2
+item: 3
 ```
 
 ##  Installation
@@ -47,8 +61,8 @@ func main() {
 Install with the `go get` command:
 
 ```
-$ go get -u github.com/felix-kaestner/go-library-template
-``` -->
+$ go get -u github.com/felix-kaestner/iterator
+```
 
 ## Contribute
 

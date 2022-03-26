@@ -1,3 +1,3 @@
-module github.com/felix-kaestner/go-library-template
+module github.com/felix-kaestner/iterator
 
 go 1.18
