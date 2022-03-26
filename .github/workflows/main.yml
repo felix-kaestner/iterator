@@ -43,9 +43,8 @@ jobs:
     - name: Coverage
       run: go test -v ./... -race -coverprofile=coverage.txt -covermode=atomic
 
-    # Uncomment to upload test coverage to Codecov
-    # - name: Upload coverage to Codecov
-    #   if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    #   uses: codecov/codecov-action@v2
-    #   with:
-    #     token: ${{ secrets.CODECOV_TOKEN }}
+    - name: Upload coverage to Codecov
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
