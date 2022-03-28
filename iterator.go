@@ -2,37 +2,28 @@ package iterator
 
 import "errors"
 
-const (
-	// Version is the current version of the library.
-	Version = "0.0.1"
-)
+// Done is returned when an iterator is read past its end.
+var Done = errors.New("iterator: no more items in iterator")
 
-var (
-	// Done is returned when an iterator is read past its end.
-	Done = errors.New("iterator: no more items in iterator")
-)
+// Iterator is the interface that allows to sequentially
+// access the elements of a collection or another entity
+// that can be represented as a sequence of elements.
+type Iterator[T any] interface {
+	// Next returns the next item in the iteration.
+	// It returns a nil pointer and ErrIteratorOverread
+	// if the iterator was read past its end.
+	// Otherwise it returns a reference to the next item.
+	Next() (*T, error)
+	// HasNext returns true if the iteration has more elements.
+	HasNext() bool
+}
 
-type (
-	// Iterator is the interface that allows to sequentially
-	// access the elements of a collection or another entity
-	// that can be represented as a sequence of elements.
-	Iterator[T any] interface {
-		// Next returns the next item in the iteration.
-		// It returns a nil pointer and ErrIteratorOverread
-		// if the iterator was read past its end.
-		// Otherwise it returns a reference to the next item.
-		Next() (*T, error)
-		// HasNext returns true if the iteration has more elements.
-		HasNext() bool
-	}
-
-	// IndexedValue represents a value from a collection or sequence,
-	// along with its associated index in that collection or sequence.
-	IndexedValue[T any] struct {
-		index int
-		value *T
-	}
-)
+// IndexedValue represents a value from a collection or sequence,
+// along with its associated index in that collection or sequence.
+type IndexedValue[T any] struct {
+	index int
+	value *T
+}
 
 // ForEach iterates over the elements of the iterator, calling the
 // provided function for each element.
