@@ -114,6 +114,28 @@ func TestChannelIterator(t *testing.T) {
 	assertEqual(t, Done, err)
 }
 
+func TestFunctionIterator(t *testing.T) {
+	c := 0
+
+	i := FromFunc(func() (*int, error) {
+		if c == 3 {
+			return nil, Done
+		}
+		return &c, nil
+	})
+
+	for i.HasNext() {
+		item, _ := i.Next()
+		assertEqual(t, c, *item)
+		c++
+	}
+
+	assertEqual(t, i.HasNext(), false)
+
+	_, err := i.Next()
+	assertEqual(t, Done, err)
+}
+
 func TestIndexedIterator(t *testing.T) {
 	{
 		s := []int{1, 2, 3}

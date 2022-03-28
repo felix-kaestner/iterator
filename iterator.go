@@ -110,6 +110,41 @@ func FromChannel[T any](ch <-chan T) Iterator[T] {
 	}
 }
 
+// funcIterator implements the Iterator interface for functions.
+type funcIterator[T any] struct {
+	next *T
+	err  error
+	fn   func() (*T, error)
+}
+
+func (it *funcIterator[T]) Next() (*T, error) {
+	if !it.HasNext() {
+		return nil, it.err
+	}
+	item := it.next
+	it.next = nil
+	return item, nil
+}
+
+func (it *funcIterator[T]) HasNext() bool {
+	if it.next == nil {
+		if item, err := it.fn(); err == nil {
+			it.next = item
+		} else {
+			it.err = err
+			return false
+		}
+	}
+	return true
+}
+
+// FromFunc returns a new Iterator for the given function.
+func FromFunc[T any](fn func() (*T, error)) Iterator[T] {
+	return &funcIterator[T]{
+		fn: fn,
+	}
+}
+
 // indexedIterator implements the Iterator interface for
 // indexed collections.
 // It wraps an existing Iterator and each element produced
